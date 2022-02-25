@@ -1,0 +1,49 @@
+@import '../node_modules/bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@300;400;600&display=swap');
+
+/*
+* =============== 
+* Global Styles
+* ===============
+*/
+
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: 'Overpass', sans-serif;
+  color: rgb(57, 56, 63);
+  //background-color: #333131;
+}
+
+/*
+* ==================== 
+* Custom Project Style
+* ====================
+*/
+
+#root {
+  max-width: 1500px;
+  margin: 0 auto;
+  display: grid;
+  grid:
+    [row1-start] 'menuListNav' 12vh [row1-end]
+    [row2-start] 'main' auto [row2-end]
+    / auto;
+  min-height: 100%;
+}
+
+@media screen and (min-width: 992px) {
+  #root {
+    grid:
+      [row1-start] 'menuListNav main' auto [row1-end]
+      / 1.5fr 8.5fr;
+  }
+}

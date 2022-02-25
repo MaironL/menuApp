@@ -1,0 +1,13 @@
+.mainCont {
+  grid-area: main;
+  display: grid;
+  grid:
+    [row1-start] 'header' 10vh [row1-end]
+    [row2-start] 'plateSearch' auto [row2-end]
+    / auto;
+  min-height: 100%;
+}
+
+.headerCont {
+  grid-area: header;
+}

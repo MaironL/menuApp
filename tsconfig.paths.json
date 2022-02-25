@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "paths": {
+      /*/
+      file aliases/*/
+      "@globalStyle": ["./globalStyle.ts"],
+      /*/
+      folder aliases /*/
+      "@assets/*": ["./infrastructure/assets/*"],
+      /*/=======================/*/
+      "@components/*": ["./infrastructure/components/*"],
+      /*/=======================/*/
+      "@screens/*": ["./infrastructure/screens/*"],
+      /*/=======================/*/
+      "@routes/*": ["./infrastructure/routes/*"]
+    }
+  }
+}

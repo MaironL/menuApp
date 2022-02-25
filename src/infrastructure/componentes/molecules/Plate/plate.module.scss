@@ -1,0 +1,23 @@
+.card {
+  width: 12rem;
+
+  @media screen and (min-width: 992px) {
+    width: 10rem;
+  }
+
+  @media screen and (min-width: 1250px) {
+    width: 12rem;
+  }
+}
+
+.price {
+  left: 15%;
+  top: -10%;
+  transform: translate(-50%, -50%);
+}
+
+.vegan {
+  left: 76%;
+  top: -10%;
+  transform: translate(-50%, -50%);
+}

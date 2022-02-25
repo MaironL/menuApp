@@ -1,0 +1,14 @@
+.navCont {
+  grid-area: menuListNav;
+}
+
+.CollapseCont {
+  z-index: 100;
+  margin-top: 10px;
+  @media screen and (max-width: 991px) {
+    position: absolute;
+    top: 120%;
+    width: 150px;
+    right: 0%;
+  }
+}
