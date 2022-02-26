@@ -20,7 +20,7 @@ const AppContext = createContext<IAppContext>({
 const AppProvider = ({ children }: any) => {
   //Delayed LocalstorageCall
   const getlocalStorage = () => {
-    const localState = localStorage.getItem('state');
+    const localState = localStorage.getItem('MenuAppstate');
     return localState !== null && JSON.parse(localState);
   };
   const [state, dispatch] = useReducer(reducer, getlocalStorage() || initialState);

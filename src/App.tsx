@@ -1,16 +1,31 @@
 import { LogForm } from 'infrastructure/componentes';
-import { useState } from 'react';
+import { useGlobalContext } from 'context';
 import AppRouters from './infrastructure/routes/AppRouters';
+import { useEffect } from 'react';
+import { Spinner } from 'react-bootstrap';
 
 const App = () => {
-  const [isLog, setIsLog] = useState(true);
+  const {
+    state,
+    loginLoading,
+    LogInSuccess: { isLog },
+  } = useGlobalContext();
 
+  useEffect(() => {
+    localStorage.setItem('MenuAppstate', JSON.stringify(state));
+  }, [state]);
   if (!isLog) {
     return (
       <main
-        className={`d-flex justify-content-center align-items-center position-absolute h-100 w-100 bg-secondary`}
+        className={`d-flex justify-content-center align-items-center position-absolute h-100 w-100 bg-dark`}
       >
-        <LogForm />
+        {loginLoading ? (
+          <div>
+            <Spinner animation='border' variant='primary' />
+          </div>
+        ) : (
+          <LogForm />
+        )}
       </main>
     );
   } else {
