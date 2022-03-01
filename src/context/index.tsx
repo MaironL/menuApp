@@ -1,6 +1,6 @@
 import React, { useContext, useReducer, createContext } from 'react';
-import reducer, { initialState, IInitialState } from 'context/Home/reducer';
-import C, { CI } from './Home/constant';
+import reducer, { initialState, IInitialState } from 'context/menus/reducer';
+import C, { CI } from './menus/constant';
 
 //CreateContext Interface
 interface IAppContext extends IInitialState {

@@ -2,6 +2,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useGlobalContext } from 'context';
 import Swal from 'sweetalert2';
+import { LOGIN_URL } from 'config';
 const axios = require('axios').default;
 
 const useLogForm = () => {
@@ -16,7 +17,7 @@ const useLogForm = () => {
       password,
     };
     try {
-      let response = await axios.post(`http://challenge-react.alkemy.org/`, data);
+      let response = await axios.post(`${LOGIN_URL}`, data);
       if (response) {
         const {
           data: { token },
@@ -26,6 +27,15 @@ const useLogForm = () => {
         dispatch({
           type: C.LOGIN_SUCCESS,
           payload: { token, status, statusText, error: false },
+        });
+        Swal.fire({
+          toast: true,
+          icon: 'success',
+          title: 'Signed in successfully',
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
         });
       }
     } catch (error: any) {

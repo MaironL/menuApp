@@ -1,9 +1,4 @@
 .header {
-  // background-image: url('/infrastructure/assets/images/bgheader.jpg');
-  // background-size: cover;
-  // background-position: center;
-  // background-repeat: no-repeat;
-  // background-blend-mode: multiply;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
   margin-left: 30px;
@@ -11,6 +6,11 @@
 
   & div {
     width: 100%;
+  }
+}
+
+.headerShort {
+  & div {
     @media screen and(min-width: 992px) {
       width: max(60%, 26rem);
     }

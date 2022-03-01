@@ -7,7 +7,8 @@ const AppRouters = () => {
       <C.MenuListNav />
       <Routes>
         <Route exact path='/' element={<C.Home />} />
-        <Route path='PlateSearch' element={<C.PlateSearch />} />
+        <Route exact path='/:menus' element={<C.Menus />} />
+        <Route path='/:menus/PlateSearch' element={<C.PlateSearch />} />
         <Route path='*' element={<C.Error />} />
       </Routes>
     </Router>

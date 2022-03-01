@@ -4,17 +4,20 @@ import { Button } from 'react-bootstrap';
 import { useLogout } from './mainHeaderHook';
 
 interface IMainHeader {
-  content: string;
+  name: any;
   size: string;
+  short: boolean;
 }
-const MainHeader = ({ content, size }: IMainHeader) => {
+const MainHeader = ({ name, size, short }: IMainHeader) => {
   const { wantLogout } = useLogout();
   return (
     <header
-      className={`py-2 bg-warning d-flex justify-content-start align-items-center px-5 ${size} ${S.header}`}
+      className={`py-2 bg-warning d-flex justify-content-start align-items-center px-3 px-lg-5 ${size} ${
+        S.header
+      } ${short && S.headerShort}`}
     >
       <div className='d-flex align-items-center justify-content-between'>
-        <h1 className='m-0 text-dark'>{content}</h1>
+        <h1 className='m-0 text-dark'>{name}</h1>
         <Button
           variant='transparent'
           className='d-flex fs-6 fw-bold py-0'

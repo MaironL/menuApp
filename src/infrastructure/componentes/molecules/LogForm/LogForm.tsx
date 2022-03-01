@@ -1,6 +1,6 @@
 import { Button, Form } from 'react-bootstrap';
 import S from './logForm.module.scss';
-import useLogForm from './logFormHooks/useLogForm';
+import { useLogForm } from './logFormHooks';
 
 const LogForm = () => {
   const {

@@ -19,13 +19,7 @@ const App = () => {
       <main
         className={`d-flex justify-content-center align-items-center position-absolute h-100 w-100 bg-dark`}
       >
-        {loginLoading ? (
-          <div>
-            <Spinner animation='border' variant='primary' />
-          </div>
-        ) : (
-          <LogForm />
-        )}
+        {loginLoading ? <Spinner animation='border' variant='primary' /> : <LogForm />}
       </main>
     );
   } else {

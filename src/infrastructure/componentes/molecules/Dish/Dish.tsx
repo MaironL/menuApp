@@ -1,46 +1,50 @@
+import S from './dish.module.scss';
 import { Card } from 'react-bootstrap';
-import S from './plate.module.scss';
 import { FaLeaf } from 'react-icons/fa';
 import { BiTime } from 'react-icons/bi';
-import { MdOutlineHealthAndSafety } from 'react-icons/md';
 import { GrClose } from 'react-icons/gr';
+import { MdOutlineHealthAndSafety } from 'react-icons/md';
 
 interface Iplate {
   img: string;
   title: string;
-  time: string;
-  score: string;
+  time: number;
+  score: number;
+  vegan: boolean;
   canClose: boolean;
+  price: number;
 }
-const Plate = ({ img, title, time, score, canClose }: Iplate) => {
+const Dish = ({ img, title, time, score, vegan, canClose, price }: Iplate) => {
   return (
-    <Card className={`position-relative shadow mx-3 mx-lg-2 mb-5 mb-lg-2  ${S.card}`}>
+    <Card className={`position-relative shadow h-100 ${S.card}`}>
       {canClose && (
         <div className='position-absolute top-0 end-0 px-2'>
           <GrClose />
         </div>
       )}
-      <Card.Img variant='top' src='https://via.placeholder.com/100x100' />
-      <Card.Body className='position-relative px-1'>
+      <Card.Img variant='top' src={img} />
+      <Card.Body className='position-relative px-1 d-flex flex-column justify-content-between'>
         <div
           className={`position-absolute bg-white rounded-pill px-2 py-1 text-success text-center shadow ${S.price}`}
         >
-          $600
+          {`$${price}`}
         </div>
-        <div
-          className={`d-flex position-absolute  bg-white rounded-pill px-2 py-1 text-center shadow text-success ${S.vegan}`}
-        >
-          <span className='me-1 fw-bold'>Vegan</span>
-          <FaLeaf className='fs-5' />
-        </div>
+        {vegan && (
+          <div
+            className={`d-flex position-absolute  bg-white rounded-pill px-2 py-1 text-center shadow text-success ${S.vegan}`}
+          >
+            <span className='me-1 fw-bold'>Vegan</span>
+            <FaLeaf className='fs-5' />
+          </div>
+        )}
         <Card.Title className='fs-6 text-center'>{title}</Card.Title>
         <Card.Text className='fs-6 px-2'>
           <div className='d-flex align-items-center'>
-            <BiTime className='text-info fs-5 me-1' /> <span>60 min</span>
+            <BiTime className='text-info fs-5 me-1' /> <span>{time}</span>
           </div>{' '}
           <div className='d-flex align-items-center'>
             <MdOutlineHealthAndSafety className='text-info fs-5 me-1' />
-            <span className='d-block'>86 score</span>
+            <span className='d-block'>{score}</span>
           </div>
         </Card.Text>
 
@@ -50,4 +54,4 @@ const Plate = ({ img, title, time, score, canClose }: Iplate) => {
   );
 };
 
-export default Plate;
+export default Dish;
