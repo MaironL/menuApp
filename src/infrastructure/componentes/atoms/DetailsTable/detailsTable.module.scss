@@ -1,6 +1,6 @@
 .tableBody {
   display: block;
-  height: 260px;
+  max-height: 240px;
   overflow-y: scroll;
   overflow-x: hidden;
 
@@ -42,24 +42,5 @@
     background-color: #212529;
     outline: 1px solid #212529;
     border-radius: 10px;
-  }
-}
-
-.fullDetailCont {
-  width: 100%;
-  @media screen and (min-width: 992px) {
-    width: 100%;
-  }
-}
-
-.imgCont {
-  @media screen and (min-width: 992px) {
-    width: 50%;
-  }
-}
-
-.descCont {
-  @media screen and (min-width: 992px) {
-    width: 50%;
   }
 }

@@ -1,20 +1,33 @@
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import validation from './validation';
 import { useGlobalContext } from 'context';
 import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import { LOGIN_URL } from 'config';
+import { useEffect, useState } from 'react';
 const axios = require('axios').default;
 
 const useLogForm = () => {
   //Using the dispatch and constans
+  const MySwal = withReactContent(Swal);
   const { dispatch, C } = useGlobalContext();
 
+  const [values, setValues] = useState({
+    email: '',
+    password: '',
+  });
+
+  const [errors, setErrors] = useState({
+    email: '',
+    password: '',
+  });
+
+  const [canSubmit, setCanSubmit] = useState(false);
+
   //Function to onsubmit, change loading state, and make a post
-  const login = async (email: string, password: string) => {
+  const handleSubmit = async () => {
     dispatch({ type: C.LOGIN_LOADING, payload: true });
     const data = {
-      email,
-      password,
+      ...values,
     };
     try {
       let response = await axios.post(`${LOGIN_URL}`, data);
@@ -28,7 +41,7 @@ const useLogForm = () => {
           type: C.LOGIN_SUCCESS,
           payload: { token, status, statusText, error: false },
         });
-        Swal.fire({
+        MySwal.fire({
           toast: true,
           icon: 'success',
           title: 'Signed in successfully',
@@ -39,10 +52,11 @@ const useLogForm = () => {
         });
       }
     } catch (error: any) {
-      Swal.fire({
+      MySwal.fire({
+        toast: true,
         icon: 'error',
         title: 'Oops...',
-        text: 'Something went wrong!',
+        text: 'Por favor, verifica que el usuario y contraseña introducido, sean los correctos',
         timer: 5000,
         timerProgressBar: true,
         footer: `${error}`,
@@ -56,48 +70,22 @@ const useLogForm = () => {
     dispatch({ type: C.LOGIN_LOADING, payload: false });
   };
 
-  interface formDataInterface {
-    email: string;
-    password: string;
-  }
-  //Validation logic with useFormik
-  const {
-    handleSubmit,
-    handleChange,
-    handleBlur,
-    values,
-    touched,
-    errors,
-    isValid,
-    dirty,
-  } = useFormik<formDataInterface>({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-    onSubmit: ({ email, password }: formDataInterface) => {
-      login(email, password);
-    },
-    validationSchema: Yup.object({
-      email: Yup.string()
-        .email('El correo introducido es incorrecto')
-        .required('El campo correo es requerido'),
-      password: Yup.string()
-        .min(2, 'El password debe ser de minimo 2 caracteres')
-        .required('El campo contraseña es requerido'),
-    }),
-  });
-
-  return {
-    handleSubmit,
-    handleChange,
-    handleBlur,
-    values,
-    touched,
-    errors,
-    isValid,
-    dirty,
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target;
+    setValues((prevFormData) => {
+      return { ...prevFormData, [name]: type === 'checkbox' ? checked : value };
+    });
   };
+
+  useEffect(() => {
+    setErrors(validation(values));
+  }, [values]);
+
+  useEffect(() => {
+    setCanSubmit(Object.values(errors).some((error) => error !== ''));
+  }, [errors]);
+
+  return { values, errors, canSubmit, handleSubmit, handleChange };
 };
 
 export default useLogForm;

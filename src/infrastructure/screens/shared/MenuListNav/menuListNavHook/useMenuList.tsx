@@ -1,7 +1,9 @@
 import Swal from 'sweetalert2';
 import { useGlobalContext } from 'context';
+import { useNavigate } from 'react-router-dom';
 
 const useMenuList = () => {
+  const navigate = useNavigate();
   const { dispatch, C } = useGlobalContext();
 
   const getMenu = async () => {
@@ -18,6 +20,7 @@ const useMenuList = () => {
     });
     if (name) {
       dispatch({ type: C.CREATE_MENU, payload: name });
+      navigate(`/${name}`);
       Swal.fire({
         toast: true,
         icon: 'success',

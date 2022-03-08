@@ -5,11 +5,24 @@
 .CollapseCont {
   z-index: 100;
   margin-top: 10px;
+  width: 100%;
   @media screen and (max-width: 991px) {
     position: absolute;
     top: 120%;
     width: 150px;
     right: 0%;
+  }
+}
+.fullCont {
+  @media screen and(min-width: 992px) {
+    width: 70%;
+  }
+}
+
+.delEditBtn {
+  cursor: pointer;
+  & :hover {
+    color: #ffe365;
   }
 }
 

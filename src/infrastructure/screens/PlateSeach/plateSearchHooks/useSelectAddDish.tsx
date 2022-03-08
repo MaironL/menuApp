@@ -2,12 +2,17 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { DetailsTable } from 'infrastructure/componentes';
 import { useGlobalContext } from 'context';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useVOM } from '.';
 
 const useSelectAddDish = () => {
+  const navigate = useNavigate();
+  const { menus } = useParams();
   const MySwal = withReactContent(Swal);
-  const { C, dispatch, meatOrVegan } = useGlobalContext();
+  const { vOm } = useVOM();
+  const { C, dispatch } = useGlobalContext();
 
-  interface Iitem {
+  interface IdishData {
     id: number;
     title: string;
     image: string;
@@ -21,73 +26,85 @@ const useSelectAddDish = () => {
     glutenFree: boolean;
   }
 
-  const selectDish = (id: number, price: number, item: Iitem) => {
-    //to kwon the type of dish selected
-    dispatch({ type: C.SELECT_DISH_TO_MENU, payload: item.vegan });
+  const selectDish = (dishData: IdishData) => {
     //This function return the modal to select the dish and the alarm from that action
-    return MySwal.fire({
-      title: <span>{item.title}</span>,
-      imageUrl: item.image,
+    const price = (dishData.pricePerServing * dishData.servings).toFixed(2);
+    //Modal to confirm the adding of the dish to the menu
+    MySwal.fire({
+      title: <span>{dishData.title}</span>,
+      imageUrl: dishData.image,
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, add the dish',
+      confirmButtonText: 'Yes, add this dish',
       html: (
         <div>
           <p>Are you sure you want to add this dish to your menu?</p>
           <DetailsTable
+            isModal={true}
             price={price}
-            readyInMinutes={item.readyInMinutes}
-            healthScore={item.healthScore}
-            vegan={item.vegan}
-            pricePerServing={item.pricePerServing}
-            servings={item.servings}
-            dairyFree={item.dairyFree}
-            glutenFree={item.glutenFree}
+            readyInMinutes={dishData.readyInMinutes}
+            healthScore={dishData.healthScore}
+            vegan={dishData.vegan}
+            pricePerServing={dishData.pricePerServing}
+            servings={dishData.servings}
+            dairyFree={dishData.dairyFree}
+            glutenFree={dishData.glutenFree}
           />
         </div>
       ),
     }).then((result) => {
+      //Depending of the validation, a diferent result
       if (result.isConfirmed) {
-        if (meatOrVegan === 'noMoreMeat' && !item.vegan) {
-          Swal.fire({
+        if (vOm === 'noMoreMeat' && !dishData.vegan) {
+          MySwal.fire({
             toast: true,
             icon: 'error',
-            title: 'You cannot add more "No Vegan" dishes',
+            title: 'Sorry, you can only add 2 "Non Vegan" dishes per menu',
             position: 'top-end',
             showConfirmButton: false,
-            timer: 4500,
+            timer: 3500,
             timerProgressBar: true,
           });
-        } else if (meatOrVegan === 'noMoreVegan' && item.vegan) {
-          Swal.fire({
+        } else if (vOm === 'noMoreVegan' && dishData.vegan) {
+          MySwal.fire({
             toast: true,
             icon: 'error',
-            title: 'You cannot add more "Vegan" dishes',
+            title: 'Sorry, you can only add 2 "Vegan" dishes per menu',
             position: 'top-end',
             showConfirmButton: false,
-            timer: 4500,
+            timer: 3500,
             timerProgressBar: true,
           });
-        } else if (meatOrVegan === 'noMoreDishes') {
-          Swal.fire({
+        } else if (vOm === 'noMoreDishes') {
+          navigate(`/${menus}`);
+          MySwal.fire({
             toast: true,
             icon: 'error',
-            title: 'Sorry, you cannot add more dishes',
+            title: 'Sorry, you cannot add more than 4 dishes per menu',
             position: 'top-end',
             showConfirmButton: false,
-            timer: 4500,
+            timer: 3500,
             timerProgressBar: true,
           });
         } else {
-          dispatch({ type: C.ADD_DISH_TO_MENU, payload: item });
-          Swal.fire({
+          //adding the dish
+          dispatch({ type: C.ADD_DISH_TO_MENU, payload: { dishData, menus } });
+          //couting the dish types vegan or not vegan
+          dispatch({ type: C.COUNT_DISHES_TYPES, payload: menus });
+          //to kwon the type of dish selected
+          dispatch({
+            type: C.SELECT_DISH_TO_MENU,
+            payload: { menus, isVegan: dishData.vegan },
+          });
+          //confirmation alert
+          MySwal.fire({
             toast: true,
             icon: 'success',
             title: 'You successfully added a new dish',
             position: 'top-end',
             showConfirmButton: false,
-            timer: 3000,
+            timer: 1500,
             timerProgressBar: true,
           });
         }

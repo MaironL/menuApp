@@ -1,7 +1,8 @@
 import { Table } from 'react-bootstrap';
+import S from './detailsTable.module.scss';
 
 interface IDetailsTable {
-  price: number;
+  price: string;
   readyInMinutes: number;
   healthScore: number;
   vegan: boolean;
@@ -9,6 +10,7 @@ interface IDetailsTable {
   servings: number;
   dairyFree: boolean;
   glutenFree: boolean;
+  isModal: boolean;
 }
 
 const DetailsTable = ({
@@ -20,10 +22,11 @@ const DetailsTable = ({
   price,
   dairyFree,
   glutenFree,
+  isModal,
 }: IDetailsTable) => {
   return (
     <Table hover responsive>
-      <tbody>
+      <tbody className={`${!isModal && S.tableBody}`}>
         <tr>
           <td>Price:</td>
           <td>${price}</td>

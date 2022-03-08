@@ -1,18 +1,19 @@
-import {
-  MainHeader,
-  MenuDetails,
-  Dish,
-  PlateDetails,
-  PlateDetailsModal,
-} from 'infrastructure/componentes';
-import { useState } from 'react';
+import { MainHeader, MenuDetails, Dish, DishDetails } from 'infrastructure/componentes';
 import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import {
+  useMenusList,
+  useDishDetails,
+  useMenuDetails,
+  useDeleteDish,
+} from './menusHooks';
 import S from './menus.module.scss';
-import { useParams } from 'react-router-dom';
 
 const Menus = () => {
-  const [show, setShow] = useState(false);
+  const { setDishDetails, dishDetails } = useDishDetails();
+  const { totalDishData } = useMenuDetails();
+  const { deleteDish } = useDeleteDish();
+  const { menuDishes } = useMenusList();
   const { menus } = useParams();
 
   return (
@@ -22,36 +23,38 @@ const Menus = () => {
       </div>
 
       <section
-        className={`container d-none d-lg-block bg-white rounded m-2 shadow mh-50 ${S.plateDetails}`}
+        className={`container d-none d-lg-block bg-white rounded-right mb-2 shadow ${S.platesDetails}`}
       >
-        <PlateDetails />
+        <DishDetails dishData={dishDetails} />
       </section>
       <section
-        className={`position-relative d-flex flex-wrap align-items-start justify-content-center py-5 py-lg-3 m-2 overflow-auto bg-white rounded m-2 shadow ${S.platesList}`}
+        className={`position-relative d-flex flex-wrap justify-content-center py-5 py-lg-3 m-lg-2 overflow-auto bg-white rounded shadow ${S.platesList}`}
       >
-        {/* <Dish
-          img={'asdasd'}
-          title={'El titulo'}
-          time={'126'}
-          score={'34'}
-          vegan={true}
-          canClose
-        />
-         */}
+        {menuDishes.map((dish, i) => {
+          return (
+            <div key={i} className={`mx-3 mx-lg-2 mb-5 mb-lg-2 ${S.dishCont}`}>
+              <Dish
+                dishData={dish}
+                canDel={true}
+                deleteDish={() => deleteDish(dish.id, dish)}
+                setDishDetails={() => setDishDetails(dish)}
+              />
+            </div>
+          );
+        })}
       </section>
       <section
         className={`d-flex justify-content-center align-items-center my-2 ${S.addPlate}`}
       >
         <Link to='PlateSearch'>
           <Button className='rounded-pill shadow' variant='warning'>
-            Agregar Plato
+            Add some dishes
           </Button>
         </Link>
       </section>
-      <section className={`bg-white rounded m-2 shadow ${S.menuDetails}`}>
-        <MenuDetails />
+      <section className={`bg-white rounded-right shadow ${S.menuDetails}`}>
+        <MenuDetails totalDishData={totalDishData} />
       </section>
-      <PlateDetailsModal show={show} setShow={setShow} />
     </main>
   );
 };

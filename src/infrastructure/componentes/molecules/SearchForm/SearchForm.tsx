@@ -55,10 +55,10 @@ const SearchForm = () => {
           name='expectedResult'
           onChange={handleChange}
           value={values.expectedResult}
-          min={'10'}
+          min={'1'}
         />
         <Form.Text>
-          Choose a range between 10 - 100 results :
+          Choose a range between 1 - 100 results :
           <span className='text-primary fw-bold'> {values.expectedResult}</span>
         </Form.Text>
       </Form.Group>

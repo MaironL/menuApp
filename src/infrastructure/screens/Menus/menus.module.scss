@@ -1,6 +1,7 @@
 .mainCont {
   grid-area: main;
   display: grid;
+  grid-column: 10px;
   grid:
     [row1-start] 'header' 10vh [row1-end]
     [row2-start] 'platesList' auto [row2-end]
@@ -14,8 +15,13 @@
       [row2-start] 'plateDetails plateDetails platesList' auto [row2-end]
       [row3-start] 'menuDetails menuDetails platesList' auto [row3-end]
       [row3-start] 'menuDetails menuDetails addPlate' auto [row3-end]
-      / 6fr 18px 4fr;
+      / 6fr 1px 4fr;
   }
+}
+
+.dishCont {
+  height: 100%;
+  max-height: 300px;
 }
 
 .headerCont {
@@ -25,11 +31,15 @@
 .platesList {
   grid-area: platesList;
 
+  @media screen and (max-width: 991px) {
+    height: fit-content;
+  }
+
   @media screen and(min-width: 992px) {
     max-height: 75vh;
     position: relative;
     top: -8%;
-    min-height: 108%;
+    min-height: 106%;
   }
 
   button {
@@ -55,6 +65,15 @@
 
 .platesDetails {
   grid-area: plateDetails;
+  @media screen and(min-width:992px) {
+    min-height: 470px;
+
+    & div {
+      & div {
+        max-height: 303px;
+      }
+    }
+  }
 }
 
 .menuDetails {

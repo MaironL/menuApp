@@ -1,12 +1,14 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useGlobalContext } from 'context';
-import { SEARCH_ENDPOINT } from 'config';
+import { SEARCH_ENDPOINT, API_KEY } from 'config';
 import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 const axios = require('axios').default;
 
 const useSearchDishForm = () => {
+  const MySwal = withReactContent(Swal);
   const { dispatch, C } = useGlobalContext();
   const { menus } = useParams();
 
@@ -44,16 +46,17 @@ const useSearchDishForm = () => {
     }${excludeCuisine.length > 0 ? excludeDishes : ''}&number=${expectedResult}${
       isVegan ? '&diet=Vegan' : ''
     }&addRecipeInformation=true`;
-
     try {
-      let response = await axios.get(`${SEARCH_ENDPOINT}${theQueryString}`);
+      let response = await axios.get(
+        `${SEARCH_ENDPOINT}${theQueryString}&apiKey=${API_KEY}`
+      );
       if (response) {
         dispatch({
           type: C.SEARCH_DISHES_SUCCESS,
           payload: { name: menus, dishes: response.data.results },
         });
         if (response.data.results.length > 0) {
-          Swal.fire({
+          MySwal.fire({
             toast: true,
             icon: 'success',
             title: 'dishes were successfully searched',
@@ -63,7 +66,7 @@ const useSearchDishForm = () => {
             timerProgressBar: true,
           });
         } else {
-          Swal.fire({
+          MySwal.fire({
             toast: true,
             icon: 'error',
             title:
@@ -76,7 +79,7 @@ const useSearchDishForm = () => {
         }
       }
     } catch (error) {
-      Swal.fire({
+      MySwal.fire({
         toast: true,
         icon: 'error',
         title: 'Oops...Something were wrong with the dishes search',
@@ -118,7 +121,7 @@ const useSearchDishForm = () => {
       dish: '',
       includeCuisine: [],
       excludeCuisine: [],
-      expectedResult: '50',
+      expectedResult: '10',
       isVegan: '',
     },
     onSubmit: ({

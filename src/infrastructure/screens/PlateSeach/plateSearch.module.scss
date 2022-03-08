@@ -6,8 +6,20 @@
     [row2-start] 'plateSearch' auto [row2-end]
     / auto;
   min-height: 100%;
+  position: relative;
 }
 
 .headerCont {
   grid-area: header;
+}
+
+.backBtn {
+  position: absolute;
+  cursor: pointer;
+  display: inline-block;
+  width: fit-content;
+  font-size: 36px;
+  top: 100px;
+  right: 2%;
+  color: #0d6efd;
 }

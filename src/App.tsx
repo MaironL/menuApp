@@ -14,6 +14,7 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem('MenuAppstate', JSON.stringify(state));
   }, [state]);
+
   if (!isLog) {
     return (
       <main

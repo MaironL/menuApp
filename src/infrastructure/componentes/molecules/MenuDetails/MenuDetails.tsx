@@ -1,6 +1,14 @@
 import { Table } from 'react-bootstrap';
 
-const MenuDetails = () => {
+interface ITotalDishData {
+  totalDishData: {
+    totalHealScore: number | false;
+    totalReadyInMinutes: number | false;
+    totalPrice: string | false | 0;
+  };
+}
+
+const MenuDetails = ({ totalDishData }: ITotalDishData) => {
   return (
     <div className='px-3 pt-3 mt-auto w-100'>
       <div className='d-flex align-items-center justify-content-center h-100 w-100 mb-4'>
@@ -18,9 +26,9 @@ const MenuDetails = () => {
         </thead>
         <tbody>
           <tr>
-            <td>$600</td>
-            <td>193</td>
-            <td>120 minutes</td>
+            <td>${totalDishData.totalPrice}</td>
+            <td>{totalDishData.totalHealScore}</td>
+            <td>{totalDishData.totalReadyInMinutes} minutes</td>
           </tr>
         </tbody>
       </Table>
