@@ -20,7 +20,7 @@ const useDelEditMenu = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const { value: name } = await Swal.fire({
-          title: 'Choice a diferent name',
+          title: 'Choose a diferent name',
           input: 'text',
           inputLabel: 'Write the new name of your menu',
           inputPlaceholder: 'menu name',
