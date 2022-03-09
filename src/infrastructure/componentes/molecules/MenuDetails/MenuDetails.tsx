@@ -13,7 +13,7 @@ const MenuDetails = ({ totalDishData }: ITotalDishData) => {
     <div className='px-3 pt-3 mt-auto w-100'>
       <div className='d-flex align-items-center justify-content-center h-100 w-100 mb-4'>
         <header>
-          <h2 className='fs-4'>Details of the Menu</h2>
+          <h2 className='fs-4 fw-bold'>MENU DETAILS</h2>
         </header>
       </div>
       <Table hover>

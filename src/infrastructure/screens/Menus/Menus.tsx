@@ -23,12 +23,12 @@ const Menus = () => {
       </div>
 
       <section
-        className={`container d-none d-lg-block bg-white rounded-right mb-2 shadow ${S.platesDetails}`}
+        className={`container d-none d-lg-block bg-white rounded-right mb-2 shadow ${S.dishDetails}`}
       >
         <DishDetails dishData={dishDetails} />
       </section>
       <section
-        className={`position-relative d-flex flex-wrap justify-content-center py-5 py-lg-3 m-lg-2 overflow-auto bg-white rounded shadow ${S.platesList}`}
+        className={`position-relative d-flex flex-wrap justify-content-center py-5 py-lg-3 m-lg-2 overflow-auto bg-white rounded shadow ${S.dishList}`}
       >
         {menuDishes.map((dish, i) => {
           return (
@@ -44,9 +44,9 @@ const Menus = () => {
         })}
       </section>
       <section
-        className={`d-flex justify-content-center align-items-center my-2 ${S.addPlate}`}
+        className={`d-flex justify-content-center align-items-center my-2 ${S.addDish}`}
       >
-        <Link to='PlateSearch'>
+        <Link to='dishSearch'>
           <Button className='rounded-pill shadow' variant='warning'>
             Add some dishes
           </Button>

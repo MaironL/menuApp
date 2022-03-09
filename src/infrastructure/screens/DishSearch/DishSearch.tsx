@@ -1,12 +1,12 @@
 import { MainHeader, SearchForm, Dish } from 'infrastructure/componentes';
-import { useDishesList, useSelectAddDish } from './plateSearchHooks';
+import { useDishesList, useSelectAddDish } from './DishSearchHooks';
 import { useParams, Link } from 'react-router-dom';
 import { TiArrowBack } from 'react-icons/ti';
 import { useGlobalContext } from 'context';
 import { Spinner } from 'react-bootstrap';
-import S from './plateSearch.module.scss';
+import S from './dishSearch.module.scss';
 
-const PlateSearch = () => {
+const DishSearch = () => {
   const { menus } = useParams();
   const { dishes } = useDishesList();
   const { searchLoading } = useGlobalContext();
@@ -48,4 +48,4 @@ const PlateSearch = () => {
   );
 };
 
-export default PlateSearch;
+export default DishSearch;

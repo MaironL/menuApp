@@ -17,7 +17,7 @@ const MainHeader = ({ name, size, short }: IMainHeader) => {
       } ${short && S.headerShort}`}
     >
       <div className='d-flex align-items-center justify-content-between'>
-        <h1 className='m-0 text-dark fs-2 fs-xl-1 pt-2 pb-1 pt-xl-0'>{name}</h1>
+        <h1 className='m-0 text-dark fs-2 fs-xl-1 pt-2 pb-1 pb-lg-0 pt-xl-0'>{name}</h1>
         <Button
           variant='transparent'
           className='d-flex fs-6 fw-bold py-0'

@@ -5,4 +5,4 @@ export { default as MenuListNav } from './shared/MenuListNav/MenuListNav';
 export { default as Home } from './Home/Home';
 export { default as Menus } from './Menus/Menus';
 export { default as Error } from './Error/Error';
-export { default as PlateSearch } from './PlateSeach/PlateSearch';
+export { default as DishSearch } from './DishSearch/DishSearch';

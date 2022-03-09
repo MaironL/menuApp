@@ -4,17 +4,17 @@
   grid-column: 10px;
   grid:
     [row1-start] 'header' 10vh [row1-end]
-    [row2-start] 'platesList' auto [row2-end]
-    [row3-start] 'addPlate' auto [row3-end]
+    [row2-start] 'dishList' auto [row2-end]
+    [row3-start] 'addDish' auto [row3-end]
     [row4-start] 'menuDetails' auto [row4-end]
     / auto;
   min-height: 100%;
   @media screen and (min-width: 992px) {
     grid:
       [row1-start] 'header header header' 10vh [row1-end]
-      [row2-start] 'plateDetails plateDetails platesList' auto [row2-end]
-      [row3-start] 'menuDetails menuDetails platesList' auto [row3-end]
-      [row3-start] 'menuDetails menuDetails addPlate' auto [row3-end]
+      [row2-start] 'dishDetails dishDetails dishList' auto [row2-end]
+      [row3-start] 'menuDetails menuDetails dishList' auto [row3-end]
+      [row3-start] 'menuDetails menuDetails addDish' auto [row3-end]
       / 6fr 1px 4fr;
   }
 }
@@ -28,8 +28,8 @@
   grid-area: header;
 }
 
-.platesList {
-  grid-area: platesList;
+.dishList {
+  grid-area: dishList;
 
   @media screen and (max-width: 991px) {
     height: fit-content;
@@ -63,8 +63,8 @@
   }
 }
 
-.platesDetails {
-  grid-area: plateDetails;
+.dishDetails {
+  grid-area: dishDetails;
   @media screen and(min-width:992px) {
     min-height: 470px;
 
@@ -80,6 +80,6 @@
   grid-area: menuDetails;
 }
 
-.addPlate {
-  grid-area: addPlate;
+.addDish {
+  grid-area: addDish;
 }

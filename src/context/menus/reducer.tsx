@@ -134,7 +134,7 @@ const reducer = (state: IInitialState, { type, payload }: Taction) => {
             dishDetail: {
               id: 0,
               title: '',
-              image: '',
+              image: 'https://placehold.jp/FFFFFF/ffffff/150x150.jpg',
               imageType: '',
               readyInMinutes: 0,
               healthScore: 0,

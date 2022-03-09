@@ -24,7 +24,7 @@ const DishDetails = ({ dishData }: IDishDetails) => {
     <div className='d-flex flex-column  align-items-center py-3 h-100'>
       <div className='d-flex align-items-center justify-content-center h-100 w-100 mb-4'>
         <header>
-          <h2 className='fs-4 fw-bold'>Details of Dish</h2>
+          <h2 className='fs-4 fw-bold'>DISH DETAILS</h2>
         </header>
       </div>
 
