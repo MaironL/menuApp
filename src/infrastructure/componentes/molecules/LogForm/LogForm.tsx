@@ -27,11 +27,10 @@ const LogForm = () => {
   return (
     <Form className={`bg-light p-4 rounded-3 ${S.form}`} onSubmit={handleSubmit}>
       <Form.Group className='mb-4 position-relative' controlId='formBasicEmail'>
-        <Form.Label htmlFor='name'>Email address</Form.Label>
+        <Form.Label>Email address</Form.Label>
         <Form.Control
           type='email'
           name='email'
-          id='name'
           placeholder='Jhon@dohn.com'
           onChange={handleChange}
           value={values.email}
@@ -44,11 +43,10 @@ const LogForm = () => {
       </Form.Group>
 
       <Form.Group className='mb-4 position-relative' controlId='formBasicPassword'>
-        <Form.Label htmlFor='password'>Password</Form.Label>
+        <Form.Label>Password</Form.Label>
         <Form.Control
           type='password'
           name='password'
-          id='password'
           placeholder='*****'
           onChange={handleChange}
           value={values.password}

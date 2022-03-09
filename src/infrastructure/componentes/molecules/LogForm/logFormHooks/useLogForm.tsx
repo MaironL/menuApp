@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react';
 const axios = require('axios').default;
 
 const useLogForm = () => {
-  //Using the dispatch and constans
   const MySwal = withReactContent(Swal);
+  //Using the dispatch and constans
   const { dispatch, C } = useGlobalContext();
 
   const [values, setValues] = useState({
@@ -26,6 +26,7 @@ const useLogForm = () => {
   //Function to onsubmit, change loading state, and make a post
   const handleSubmit = async () => {
     dispatch({ type: C.LOGIN_LOADING, payload: true });
+
     const data = {
       ...values,
     };
@@ -53,10 +54,9 @@ const useLogForm = () => {
       }
     } catch (error: any) {
       MySwal.fire({
-        toast: true,
         icon: 'error',
         title: 'Oops...',
-        text: 'Por favor, verifica que el usuario y contraseña introducido, sean los correctos',
+        text: 'Please verify that the username and password entered are correct.',
         timer: 5000,
         timerProgressBar: true,
         footer: `${error}`,
