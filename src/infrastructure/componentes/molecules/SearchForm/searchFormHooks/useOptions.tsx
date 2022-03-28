@@ -1,5 +1,3 @@
-import React from 'react';
-
 const useOptions = () => {
   const options = [
     { value: 'African', label: 'African' },

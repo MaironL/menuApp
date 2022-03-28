@@ -1,4 +1,3 @@
-import { Table } from 'react-bootstrap';
 import { DetailsTable } from 'infrastructure/componentes';
 import S from './dishDetails.module.scss';
 
