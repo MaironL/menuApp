@@ -42,7 +42,6 @@ const useLogForm = () => {
       );
 
       if (response) {
-        console.log('Respuesta :', response);
         const {
           data: {
             user: { name: userName },
@@ -51,7 +50,7 @@ const useLogForm = () => {
           status,
           statusText,
         } = response;
-        console.log(userName);
+
         dispatch({
           type: C.LOGIN_SUCCESS,
           payload: { token, userName, status, statusText, error: false },
