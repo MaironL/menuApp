@@ -46,7 +46,7 @@ const useSearchDishForm = () => {
       isVegan ? '&diet=Vegan' : ''
     }&addRecipeInformation=true`;
     try {
-      let response = await axios.get(
+      const response = await axios.get(
         `${process.env.REACT_APP_SEARCH_ENDPOINT}${theQueryString}&apiKey=${process.env.REACT_APP_API_KEY}`
       );
       if (response) {

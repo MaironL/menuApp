@@ -2,6 +2,7 @@ import S from './mainHeader.module.scss';
 import { FaUserAlt } from 'react-icons/fa';
 import { Button } from 'react-bootstrap';
 import { useLogout } from './mainHeaderHook';
+import { useGlobalContext } from 'context';
 
 interface IMainHeader {
   name: any;
@@ -9,7 +10,11 @@ interface IMainHeader {
   short: boolean;
 }
 const MainHeader = ({ name, size, short }: IMainHeader) => {
+  const {
+    LogInSuccess: { userName },
+  } = useGlobalContext();
   const { wantLogout } = useLogout();
+
   return (
     <header
       className={`py-0 py-xl-2 bg-warning d-flex justify-content-start align-items-center px-3 px-lg-5 ${size} ${
@@ -23,7 +28,8 @@ const MainHeader = ({ name, size, short }: IMainHeader) => {
           className='d-flex fs-6 fw-bold py-0'
           onClick={wantLogout}
         >
-          Logout <FaUserAlt className='ms-2 text-danger fs-5' />
+          <span className='me-3'>{userName}</span> Logout
+          <FaUserAlt className='ms-2 text-danger fs-5' />
         </Button>
       </div>
     </header>

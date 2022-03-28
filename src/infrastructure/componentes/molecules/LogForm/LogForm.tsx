@@ -4,8 +4,10 @@ import S from './logForm.module.scss';
 import { useLogForm } from './logFormHooks';
 
 const LogForm = () => {
-  const { values, canSubmit, errors, handleSubmit, handleChange } = useLogForm();
+  const { values, canSubmit, errors, setValues, handleSubmit, handleChange } =
+    useLogForm();
   const [focused, setFocused] = useState({
+    name: false,
     email: false,
     password: false,
   });
@@ -25,13 +27,38 @@ const LogForm = () => {
   };
 
   return (
-    <Form className={`bg-light p-4 rounded-3 ${S.form}`} onSubmit={handleSubmit}>
-      <Form.Group className='mb-4 position-relative' controlId='formBasicEmail'>
+    <Form
+      className={`d-flex flex-column align-items-center  bg-light p-4 rounded-3 ${S.form}`}
+      onSubmit={handleSubmit}
+    >
+      <h2 className='text-center fs-4'>{values.isLogin ? 'Login' : 'Sign up'}</h2>
+
+      {!values.isLogin && (
+        <Form.Group className='mb-4 position-relative w-100' controlId='formBasicEmail'>
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            type='string'
+            name='name'
+            placeholder='Jhon doe'
+            onChange={handleChange}
+            value={values.name}
+            onBlur={handleFocusedBlur}
+            onFocus={handleFocusedFocus}
+          />
+          {focused.name && errors.name ? (
+            <div className='position-absolute mt-1 text-danger fw-bold'>
+              {errors.name}
+            </div>
+          ) : null}
+        </Form.Group>
+      )}
+
+      <Form.Group className='mb-4 position-relative w-100' controlId='formBasicEmail'>
         <Form.Label>Email address</Form.Label>
         <Form.Control
           type='email'
           name='email'
-          placeholder='Jhon@dohn.com'
+          placeholder='Jhon@doe.com'
           onChange={handleChange}
           value={values.email}
           onBlur={handleFocusedBlur}
@@ -41,8 +68,7 @@ const LogForm = () => {
           <div className='position-absolute mt-1 text-danger fw-bold'>{errors.email}</div>
         ) : null}
       </Form.Group>
-
-      <Form.Group className='mb-4 position-relative' controlId='formBasicPassword'>
+      <Form.Group className='mb-4 position-relative w-100' controlId='formBasicPassword'>
         <Form.Label>Password</Form.Label>
         <Form.Control
           type='password'
@@ -60,9 +86,25 @@ const LogForm = () => {
         ) : null}
       </Form.Group>
 
-      <Button className='mb-3 mt-2' variant='primary' type='submit' disabled={canSubmit}>
-        Submit
+      <Button
+        className='mb-3 mt-2 w-50'
+        variant='primary'
+        type='submit'
+        disabled={canSubmit}
+      >
+        {values.isLogin ? 'Login' : 'Register'}
       </Button>
+
+      <Form.Group className='mt-4 text-center position-relative'>
+        <Button
+          className='fs-6'
+          variant='transparent'
+          type='button'
+          onClick={() => setValues({ ...values, isLogin: !values.isLogin })}
+        >
+          {values.isLogin ? 'Create account' : 'Login with your account'}
+        </Button>
+      </Form.Group>
     </Form>
   );
 };

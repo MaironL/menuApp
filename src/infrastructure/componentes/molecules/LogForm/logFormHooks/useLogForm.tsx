@@ -11,11 +11,14 @@ const useLogForm = () => {
   const { dispatch, C } = useGlobalContext();
 
   const [values, setValues] = useState({
+    isLogin: true,
+    name: '',
     email: '',
     password: '',
   });
 
   const [errors, setErrors] = useState({
+    name: '',
     email: '',
     password: '',
   });
@@ -26,21 +29,32 @@ const useLogForm = () => {
   const handleSubmit = async () => {
     dispatch({ type: C.LOGIN_LOADING, payload: true });
 
-    const data = {
-      ...values,
-    };
+    const data = values.isLogin
+      ? { email: values.email, password: values.password }
+      : { name: values.name, email: values.email, password: values.password };
+
     try {
-      console.log('----------------', process.env.REACT_APP_API);
-      let response = await axios.post(`${process.env.REACT_APP_API}/auth/login`, data);
+      const response = await axios.post(
+        `${process.env.REACT_APP_API}${
+          values.isLogin ? '/auth/login' : '/auth/register'
+        }`,
+        data
+      );
+
       if (response) {
+        console.log('Respuesta :', response);
         const {
-          data: { token },
+          data: {
+            user: { name: userName },
+            token,
+          },
           status,
           statusText,
         } = response;
+        console.log(userName);
         dispatch({
           type: C.LOGIN_SUCCESS,
-          payload: { token, status, statusText, error: false },
+          payload: { token, userName, status, statusText, error: false },
         });
         MySwal.fire({
           toast: true,
@@ -59,8 +73,9 @@ const useLogForm = () => {
         text: 'Please verify that the username and password entered are correct.',
         timer: 5000,
         timerProgressBar: true,
-        footer: `${error}`,
+        footer: `${error.message}`,
       });
+      console.log(error.message);
       dispatch({
         type: C.LOGIN_FAIL,
         payload: typeof error.message !== 'undefined' && error.message,
@@ -85,7 +100,7 @@ const useLogForm = () => {
     setCanSubmit(Object.values(errors).some((error) => error !== ''));
   }, [errors]);
 
-  return { values, errors, canSubmit, handleSubmit, handleChange };
+  return { values, errors, canSubmit, setValues, handleSubmit, handleChange };
 };
 
 export default useLogForm;

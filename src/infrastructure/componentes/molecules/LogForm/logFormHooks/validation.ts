@@ -1,13 +1,24 @@
 interface IValidation {
+  isLogin: boolean;
+  name: string;
   email: string;
   password: string;
 }
 
 const validation = (props: IValidation) => {
   const errors = {
+    name: '',
     email: '',
     password: '',
   };
+
+  if (!props.isLogin && !props.name.trim()) {
+    errors.name = 'This field is required';
+  } else if (!props.isLogin && props.name.length < 3) {
+    errors.name = 'Username field must be at least 3 characters';
+  } else {
+    errors.name = '';
+  }
 
   //Validation for email
   if (!props.email.trim()) {

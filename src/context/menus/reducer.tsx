@@ -8,6 +8,7 @@ type Taction = {
 export interface IInitialState {
   loginLoading: boolean;
   LogInSuccess: {
+    userName: string;
     isLog: boolean;
     status: string;
     statusText: string;
@@ -71,6 +72,7 @@ export const initialState: IInitialState = {
   //Login
   loginLoading: false,
   LogInSuccess: {
+    userName: '',
     isLog: false,
     status: '',
     statusText: '',
@@ -99,6 +101,7 @@ const reducer = (state: IInitialState, { type, payload }: Taction) => {
         ...state,
         logInFail: { fail: true, error: payload },
         LogInSuccess: {
+          userName: '',
           isLog: false,
           status: '',
           statusText: '',
@@ -111,6 +114,7 @@ const reducer = (state: IInitialState, { type, payload }: Taction) => {
       return {
         ...state,
         LogInSuccess: {
+          userName: '',
           isLog: false,
           status: '',
           statusText: '',
