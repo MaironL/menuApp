@@ -1,7 +1,6 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useGlobalContext } from 'context';
-import { SEARCH_ENDPOINT, API_KEY } from 'config';
 import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
@@ -48,7 +47,7 @@ const useSearchDishForm = () => {
     }&addRecipeInformation=true`;
     try {
       let response = await axios.get(
-        `${SEARCH_ENDPOINT}${theQueryString}&apiKey=${API_KEY}`
+        `${process.env.REACT_APP_SEARCH_ENDPOINT}${theQueryString}&apiKey=${process.env.REACT_APP_API_KEY}`
       );
       if (response) {
         dispatch({

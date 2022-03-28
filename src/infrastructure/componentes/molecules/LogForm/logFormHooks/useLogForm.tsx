@@ -2,7 +2,6 @@ import validation from './validation';
 import { useGlobalContext } from 'context';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { LOGIN_URL } from 'config';
 import { useEffect, useState } from 'react';
 const axios = require('axios').default;
 
@@ -31,7 +30,8 @@ const useLogForm = () => {
       ...values,
     };
     try {
-      let response = await axios.post(`${LOGIN_URL}`, data);
+      console.log('----------------', process.env.REACT_APP_API);
+      let response = await axios.post(`${process.env.REACT_APP_API}/auth/login`, data);
       if (response) {
         const {
           data: { token },

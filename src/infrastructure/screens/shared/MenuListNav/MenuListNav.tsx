@@ -31,8 +31,11 @@ const MenuListNav = () => {
             {menuList.map((menu, i) => {
               const { name, id } = menu;
               return (
-                <div className='d-flex justify-content-between align-items-center mb-3 '>
-                  <Link to={name} className={`fw-bold border-bottom ${S.link}`} key={i}>
+                <div
+                  key={i}
+                  className='d-flex justify-content-between align-items-center mb-3 '
+                >
+                  <Link to={`/${name}`} className={`fw-bold border-bottom ${S.link}`}>
                     {name}
                   </Link>
                   <BsFillCaretRightFill
