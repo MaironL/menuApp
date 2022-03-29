@@ -1,6 +1,8 @@
 # Menu app
 
-This app start as a solution to [Alkemy](https://www.alkemy.org/) react challenge project. But I decided to keep working on it, create a backend, and make it more complete.
+This app start as a solution to [Alkemy](https://www.alkemy.org/) react challenge project. But I decided to keep working on it by start creating it a backend with node express and mongoDB.
+
+Note: This is just a practice project, I don't have a backend to save the dishes data, it only save the data in the frontend (localStorage). I only have a backend for auth
 
 ## Table of contents
 
@@ -46,7 +48,7 @@ I create a Node Express API Rest with MongoDB to create a login/register authent
 
 #### Right now, not available!!!
 
-- Live Site URL: [Go to live example]()
+- Live Site URL: [Go to live example](https://menuapp-ml.netlify.app/)
 
 ## My process
 
