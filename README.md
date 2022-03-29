@@ -46,8 +46,6 @@ I create a Node Express API Rest with MongoDB to create a login/register authent
 
 ### Links
 
-#### Right now, not available!!!
-
 - Live Site URL: [Go to live example](https://menuapp-ml.netlify.app/)
 
 ## My process
