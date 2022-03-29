@@ -39,7 +39,7 @@ const LogForm = () => {
           <Form.Control
             type='string'
             name='name'
-            placeholder='Jhon doe'
+            placeholder='Anna Doe'
             onChange={handleChange}
             value={values.name}
             onBlur={handleFocusedBlur}
@@ -58,7 +58,7 @@ const LogForm = () => {
         <Form.Control
           type='email'
           name='email'
-          placeholder='Jhon@doe.com'
+          placeholder='anna@gmail.com'
           onChange={handleChange}
           value={values.email}
           onBlur={handleFocusedBlur}
