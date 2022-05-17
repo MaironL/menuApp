@@ -13,8 +13,8 @@ const useLogForm = () => {
   const [values, setValues] = useState({
     isLogin: true,
     name: '',
-    email: '',
-    password: '',
+    email: 'peter@gmail.com',
+    password: 'thesecret',
   });
 
   const [errors, setErrors] = useState({
@@ -35,9 +35,7 @@ const useLogForm = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API}${
-          values.isLogin ? '/auth/login' : '/auth/register'
-        }`,
+        `${process.env.REACT_APP_API}${values.isLogin ? '/auth/login' : '/auth/register'}`,
         data
       );
 
